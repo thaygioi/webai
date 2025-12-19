@@ -2,9 +2,6 @@ from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
-# ================== ADMIN CỐ ĐỊNH ==================
-ADMIN_EMAIL = "gioi@admin"
-
 # ================== USERS GIẢ LẬP ==================
 USERS = [
     {"id": 1, "name": "Giáo viên A", "email": "a@gv.vn", "credit": 20},
@@ -12,7 +9,7 @@ USERS = [
 ]
 
 # User đang đăng nhập (giả lập)
-CURRENT_USER = USERS[0]  # Giáo viên A
+CURRENT_USER = USERS[0]  # Thầy Giới (admin)
 
 # ================== APPS ==================
 APPS = [
@@ -63,8 +60,8 @@ def app_page(app_key):
 # ================== ADMIN - QUẢN LÝ USER ==================
 @app.route("/admin/users", methods=["GET", "POST"])
 def admin_users():
-    # Kiểm tra admin (giai đoạn này dùng giả lập)
-    if CURRENT_USER["email"] != USERS[0]["email"]:
+    # GIAI ĐOẠN NÀY: admin cố định là CURRENT_USER
+    if CURRENT_USER != USERS[0]:
         return "Không có quyền truy cập", 403
 
     if request.method == "POST":
@@ -79,24 +76,10 @@ def admin_users():
 
         return redirect(url_for("admin_users"))
 
-    # GIAO DIỆN TEXT ĐƠN GIẢN
-    html = "<h2>TRANG QUẢN TRỊ – QUẢN LÝ NGƯỜI DÙNG</h2>"
-    html += "<p><b>Admin:</b> Thầy Giới</p><hr>"
-
-    for u in USERS:
-        html += f"""
-        <form method="post" style="margin-bottom:15px;">
-            <b>{u['name']}</b> ({u['email']})<br>
-            Điểm hiện có: <b>{u['credit']}</b><br>
-            <input type="hidden" name="user_id" value="{u['id']}">
-            Cộng / trừ điểm:
-            <input type="number" name="change" value="0">
-            <button type="submit">Cập nhật</button>
-        </form>
-        <hr>
-        """
-
-    return html
+    return render_template(
+        "admin_users.html",
+        users=USERS
+    )
 
 # ================== RUN ==================
 if __name__ == "__main__":
