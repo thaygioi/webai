@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Giáo viên</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header class="header">
+    <h1>AI cho Giáo viên</h1>
+    <p>Nền tảng ứng dụng trí tuệ nhân tạo hỗ trợ dạy học</p>
+</header>
+
+<main class="container">
+    <div class="apps">
+        {% for app in apps %}
+        <div class="app-card">
+            <div class="icon">{{ app.icon }}</div>
+            <h3>{{ app.name }}</h3>
+            <button>Sử dụng</button>
+        </div>
+        {% endfor %}
+    </div>
+</main>
+
+<footer class="footer">
+    © 2025 – Nền tảng AI cho Giáo viên
+</footer>
+
+</body>
+</html>
