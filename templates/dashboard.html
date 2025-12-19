@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>AI Giáo viên</title>
+    <title>AI cho Giáo viên</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
@@ -18,7 +18,9 @@
         <div class="app-card">
             <div class="icon">{{ app.icon }}</div>
             <h3>{{ app.name }}</h3>
-            <button>Sử dụng</button>
+            <a href="/app/{{ app.key }}">
+                <button>Sử dụng</button>
+            </a>
         </div>
         {% endfor %}
     </div>
