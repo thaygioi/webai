@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản trị người dùng</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+        th {
+            background: #2563eb;
+            color: #fff;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        input[type="number"] {
+            width: 80px;
+            padding: 6px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 8px 18px;
+            border-radius: 999px;
+            border: none;
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #1e40af;
+        }
+        .note {
+            margin-bottom: 20px;
+            background: #eef2ff;
+            padding: 15px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <h1>TRANG QUẢN TRỊ</h1>
+    <p>Quản lý người dùng & điểm</p>
+</header>
+
+<main class="container">
+
+    <div class="note">
+        👤 <b>Admin:</b> Thầy Giới<br>
+        ➕ Nhập số dương để cộng điểm<br>
+        ➖ Nhập số âm để trừ điểm
+    </div>
+
+    <table>
+        <tr>
+            <th>Tên</th>
+            <th>Email</th>
+            <th>Điểm hiện có</th>
+            <th>Cộng / trừ điểm</th>
+            <th>Hành động</th>
+        </tr>
+
+        {% for u in users %}
+        <tr>
+            <form method="post">
+                <td>{{ u.name }}</td>
+                <td>{{ u.email }}</td>
+                <td><b>{{ u.credit }}</b></td>
+                <td>
+                    <input type="hidden" name="user_id" value="{{ u.id }}">
+                    <input type="number" name="change" value="0">
+                </td>
+                <td>
+                    <button type="submit">Cập nhật</button>
+                </td>
+            </form>
+        </tr>
+        {% endfor %}
+    </table>
+
+</main>
+
+<footer class="footer">
+    © 2025 – Hệ sinh thái AI dành cho giáo viên
+</footer>
+
+</body>
+</html>
