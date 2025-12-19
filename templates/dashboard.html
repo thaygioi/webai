@@ -13,17 +13,45 @@
 </header>
 
 <main class="container">
+
+    <!-- THÔNG TIN NGƯỜI DÙNG -->
+    <div style="
+        background:#fff;
+        padding:20px;
+        border-radius:12px;
+        margin-bottom:30px;
+        box-shadow:0 10px 20px rgba(0,0,0,0.06);
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+    ">
+        <div>
+            👤 <strong>{{ user.name }}</strong>
+        </div>
+        <div style="font-size:16px;">
+            💳 Điểm hiện có:
+            <strong style="color:#2563eb;">
+                {{ user.credit }}
+            </strong>
+        </div>
+    </div>
+
+    <!-- DANH SÁCH ỨNG DỤNG -->
     <div class="apps">
         {% for app in apps %}
         <div class="app-card">
             <div class="icon">{{ app.icon }}</div>
             <h3>{{ app.name }}</h3>
+            <p style="font-size:14px;color:#666;margin-bottom:15px;">
+                Mỗi lần sử dụng: {{ app.cost }} điểm
+            </p>
             <a href="/app/{{ app.key }}">
                 <button>Sử dụng</button>
             </a>
         </div>
         {% endfor %}
     </div>
+
 </main>
 
 <footer class="footer">
